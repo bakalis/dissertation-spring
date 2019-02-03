@@ -17,7 +17,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 	
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages={"com.bakalis.spring.controllers", "com.bakalis.spring.services"})
+@ComponentScan(basePackages={"com.bakalis.spring.controllers", "com.bakalis.spring.services", "com.bakalis.spring.configuration"})
 public class ServletConfig implements WebMvcConfigurer{
 	
 	@Autowired
@@ -54,6 +54,8 @@ public class ServletConfig implements WebMvcConfigurer{
 	    return templateEngine;
 	}
 	
+	
+	//Adding the view Resolver for Thymeleaf
 	@Bean
 	@Description("Thymeleaf View Resolver")
 	public ThymeleafViewResolver viewResolver() {
@@ -63,7 +65,7 @@ public class ServletConfig implements WebMvcConfigurer{
 	    return viewResolver;
 	}
 
-	
+	// Needed to Redirect resource files Requests properly
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(

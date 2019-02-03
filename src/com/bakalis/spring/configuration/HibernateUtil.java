@@ -50,6 +50,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Client.class);
                 configuration.addAnnotatedClass(Category.class);
                 configuration.addAnnotatedClass(SingleTransaction.class);
+                configuration.addAnnotatedClass(User.class);
                 
                 
                 // END OF ENTITIES ADDITION

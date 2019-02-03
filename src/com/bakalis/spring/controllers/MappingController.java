@@ -2,7 +2,11 @@ package com.bakalis.spring.controllers;
 
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +28,10 @@ public class MappingController {
 	@Autowired
 	ErrorLoggingService errorService;
 	
+	
 	@GetMapping("/")
-	public String rootURL(){
+	public String rootURL(RedirectAttributes redirectAttributes){
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/index";
 	}
 	
@@ -35,6 +41,7 @@ public class MappingController {
 		ArrayList<ContentsTuple> contents = contentsService.getAllContents();
 		model.addAttribute("contents", contents);
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "index";
 	}
 	
@@ -45,6 +52,7 @@ public class MappingController {
 		ArrayList<ContentsTuple> contents = contentsService.getSearchedContents(searchBar, searchFilter);
 		model.addAttribute("contents", contents);
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "index";
 	}
 	
@@ -57,6 +65,7 @@ public class MappingController {
 		model.addAttribute("categories", contentsService.getCategories());
 		model.addAttribute("clients", contentsService.getClients());
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "entry";
 	}
 	
@@ -68,6 +77,7 @@ public class MappingController {
 	{
 		transactionsService.manageEntry(productId, productName, category, client, quantity, code);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/index";
 	}	
 	
@@ -78,6 +88,7 @@ public class MappingController {
 		model.addAttribute("categories", contentsService.getCategories());
 		model.addAttribute("clients", contentsService.getClients());
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "retrieval";
 	}
 	
@@ -90,6 +101,7 @@ public class MappingController {
 	{
 		transactionsService.manageRetrieval(productId, productName, category, client, quantity, code);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/index";
 	}	
 	
@@ -100,6 +112,7 @@ public class MappingController {
 	public String getClients(Model model){
 		model.addAttribute("clients", contentsService.getClients());
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "clients";
 	}
 	
@@ -109,6 +122,7 @@ public class MappingController {
 	public String getSearchedClients(@RequestParam String searchBar, Model model){
 		model.addAttribute("clients", contentsService.getSearchedClients(searchBar));
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "clients";
 	}
 	
@@ -116,6 +130,7 @@ public class MappingController {
 	@GetMapping("/addClient")
 	public String getAddClient(Model model){
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "addClient";
 	}
 	
@@ -125,6 +140,7 @@ public class MappingController {
 	public String addClient(@RequestParam String clientId, @RequestParam String clientName, RedirectAttributes redirectAttributes){
 		transactionsService.addClient(clientId, clientName);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/clients";
 	}
 	
@@ -134,6 +150,7 @@ public class MappingController {
 	public String deleteClient(@PathVariable String deleteId, RedirectAttributes redirectAttributes){
 		transactionsService.deleteClient(deleteId);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/clients";
 	}
 	
@@ -142,6 +159,7 @@ public class MappingController {
 	public String getEditClient(@PathVariable String editedId, Model model){
 		model.addAttribute("client", contentsService.getEditedClient(editedId));
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "addClient";	
 	}
 	
@@ -150,6 +168,7 @@ public class MappingController {
 	public String editClient(@PathVariable String editedId, @RequestParam String clientName, RedirectAttributes redirectAttributes){
 		transactionsService.editClient(editedId, clientName);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/clients";
 	}
 	
@@ -158,6 +177,7 @@ public class MappingController {
 	public String getCategories(Model model){
 		model.addAttribute("categories", contentsService.getCategories());
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "categories";
 	}
 	//Get the categories based on the Search Mechanic
@@ -165,6 +185,7 @@ public class MappingController {
 	public String getSearchedCategories(@RequestParam String searchBar, Model model){
 		model.addAttribute("categories", contentsService.getSearchedCategories(searchBar));
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "categories";
 	}
 	
@@ -172,6 +193,7 @@ public class MappingController {
 	@GetMapping("/addCategory")
 	public String getAddCategory(Model model){
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "addCategory";
 	}
 	
@@ -181,6 +203,7 @@ public class MappingController {
 			RedirectAttributes redirectAttributes){
 		transactionsService.addCategory(categoryId, categoryName);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/categories";
 	}
 	
@@ -189,6 +212,7 @@ public class MappingController {
 	public String deleteCategory(@PathVariable String deleteId, RedirectAttributes redirectAttributes){
 		transactionsService.deleteCategory(deleteId);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/categories";
 	}
 	
@@ -197,6 +221,7 @@ public class MappingController {
 	public String getEditCategory(@PathVariable String editedId, Model model){
 		model.addAttribute("category", contentsService.getEditedCategory(editedId));
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "addCategory";	
 	}
 	
@@ -207,6 +232,7 @@ public class MappingController {
 		System.out.println(editedId);
 		transactionsService.editCategory(editedId, categoryName);
 		errorService.passErrorMessageToRedirectAttributes(redirectAttributes);
+		contentsService.passAuthObjectToRedirectAttributes(redirectAttributes);
 		return "redirect:/categories";
 	}
 	
@@ -215,6 +241,15 @@ public class MappingController {
 	public String getTransactions(Model model){
 		model.addAttribute("transactions", contentsService.getPastTransactions());
 		errorService.passErrorMessageToModel(model);
+		contentsService.passAuthObjectToModel(model);
 		return "transactions";
+	}
+	
+	
+	//Get the Log In page
+	@GetMapping("/login")
+	public String getLogin(Model model){
+		contentsService.passAuthObjectToModel(model);
+		return "login";
 	}
 }

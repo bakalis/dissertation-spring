@@ -18,9 +18,10 @@ public class TransactionsService {
 	@Autowired
 	ErrorLoggingService errorService;
 	
+	
+	//This Method Adds Products to the Database and Adds the addition to the transactions
 	public void manageEntry(String productId, String productName, String category, String client, String quantity, String code){
-		
-		
+	
 		if(validationService.isNumeric(productId) && validationService.isNumeric(quantity) 
 				&& !validationService.isEmptyString(productName)
 				&& !validationService.isEmptyString(category)      //Checking that supposed Integer parameters are 
@@ -60,7 +61,7 @@ public class TransactionsService {
 		
 	}
 	
-	
+	//This Method Retrieves Products from the Database and Adds the retrieval to the transactions
 	public void manageRetrieval(String productId, String productName, String category, String client, String quantity, String code){
 			
 		if(validationService.isNumeric(productId) && validationService.isNumeric(quantity) 
@@ -98,7 +99,7 @@ public class TransactionsService {
 			
 	}
 	
-	
+	// Self Explanatory. Adds the Transaction to the database. 
 	public void addTransactionToDatabase(Product product, Client client, int quantityChange, boolean isAnEntry){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -121,7 +122,7 @@ public class TransactionsService {
 		
 	}
 
-
+	// Adds a client to the database 
 	public void addClient(String clientId, String clientName) {
 		if(validationService.isNumeric(clientId) && !validationService.isEmptyString(clientName)){
 		
@@ -139,7 +140,7 @@ public class TransactionsService {
 		}
 	}
 
-
+	// Deletes the Client with the given Id from the Database
 	public void deleteClient(String deleteId) {
 		if(validationService.isNumeric(deleteId)){
 			SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -158,6 +159,8 @@ public class TransactionsService {
 		}
 	}
 	
+	
+	//Updates an existing Client with the Given Data
 	public void editClient(String editedId, String editedName){
 		if(validationService.isNumeric(editedId) && !validationService.isEmptyString(editedName)){
 			SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -179,6 +182,8 @@ public class TransactionsService {
 		
 	}
 	
+	
+	//Adds a new Category
 	public void addCategory(String categoryId, String categoryName) {
 		if(validationService.isNumeric(categoryId) && !validationService.isEmptyString(categoryName)){
 			SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -191,10 +196,15 @@ public class TransactionsService {
 			tr.commit();
 			session.close();
 		}else{
+			System.out.println(validationService.isNumeric(categoryId));
+			System.out.println(!validationService.isEmptyString(categoryName));
+			System.out.println(categoryId+" "+categoryName);
 			errorService.setError("Wrong Input");
 		}
 	}
 	
+	
+	//Deletes the Category with the given Id
 	public void deleteCategory(String deleteId) {
 		if(validationService.isNumeric(deleteId)){
 			SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -213,6 +223,8 @@ public class TransactionsService {
 		}
 	}
 	
+	
+	//Edits an Existing Category with the Given Data
 	public void editCategory(String editedId, String editedName){
 		if(validationService.isNumeric(editedId) && !validationService.isEmptyString(editedName)){
 			SessionFactory sf = HibernateUtil.getSessionFactory();

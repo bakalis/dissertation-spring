@@ -39,7 +39,8 @@
 			        </div>
 		      </li>
 		      <li class="nav-item">
-		          <a href="file:///E:/Angular/spring/login.html" class="nav-link">Login</a>
+		          <a data-th-if="${auth.getName()=='anonymousUser'}" data-th-href="@{/login}" class="nav-link">Login</a>
+		      	  <a data-th-if="${auth.getName()!='anonymousUser'}" data-th-href="@{/logout}" class="nav-link">Logout</a>
 		      </li>
 		      </ul>
 		    </div>

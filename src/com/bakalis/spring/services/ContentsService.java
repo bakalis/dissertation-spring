@@ -8,7 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bakalis.models.Category;
 import com.bakalis.models.Client;
@@ -238,7 +242,19 @@ public class ContentsService {
 		
 	}
 	
-	
-	
+	// Adding the Authentication Object to the Model for the Views to access
+	public void passAuthObjectToModel(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth!=null){
+			model.addAttribute("auth", auth);
+		}
+	}
+	// Adding the Authentication Object to the Redirected Model for the Views to access
+	public void passAuthObjectToRedirectAttributes(RedirectAttributes redirectAttributes){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth!=null){
+			redirectAttributes.addFlashAttribute("auth", auth);
+		}
+	}
 	
 }

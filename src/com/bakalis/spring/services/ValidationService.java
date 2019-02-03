@@ -4,23 +4,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ValidationService {
-
+	
+	
 	public boolean isNumeric(String s){
-		/*
-		try{
-			Integer.parseInt(s);
-		}catch(NumberFormatException ex){
-			return false;
-		}
-		return true;
-		*/
 		return s.matches("-?\\d+(\\.\\d+)?");
 	}
-	
+	//Checks if a given String is an empty String or has only Whitespaces
 	public boolean isEmptyString(String s){
-		if(s.length()>0)
-			return true;
-		else
+		if(s.trim().length()>0)
 			return false;
+		else
+			return true;
 	}
 }
