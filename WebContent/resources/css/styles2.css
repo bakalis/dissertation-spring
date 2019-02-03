@@ -1,0 +1,213 @@
+#navbarId{
+	width:80%;
+}
+
+.navbar{
+	z-index: 1000;
+}
+
+
+
+#content-wrapper {
+	margin:0px auto;
+	width:80%;
+	z-index: -1;
+}
+
+
+
+/* General Styling */
+
+.col-lg-12, .col-lg-9, .col-lg-11, .col-lg-1, .col-lg-10 {
+	padding:0;
+}
+
+.col-md-4{
+	padding: 0;
+}
+
+
+.margin{
+	margin-top: 30px;
+	margin-left: 10px;
+}
+
+
+
+.formDiv{
+	padding:10px;
+	border:1px solid #bdbdbd;
+	margin-top: 2vh;
+}
+
+
+
+
+
+#searchRow{
+
+	margin:5vh 0;
+
+}
+
+#pageTitle{
+	color: #343A40;
+	margin: 3vh auto;
+}
+
+
+#searchBar{
+	width:100%;
+	border-radius: 3px;
+	border: 1px solid #343A40;
+	height: 4vh;
+	font-size: 2.7vh;
+	padding-left: 0.3vw;
+	padding-top: 0;
+	color:#343A40;
+}
+
+.form-row{
+	padding:0;
+	margin: 0;
+}
+
+
+#searchFilter{
+	padding: 0;
+	width:100%;
+	height:4vh;
+	font-size:1.2vh;
+}
+
+
+#searchBtn{
+	margin: auto;
+	margin-left: 0.3vw;
+	margin-right: 0;
+	width:100%;
+	height:4vh;
+}
+
+.btn:hover{
+	background-color: #434150;
+	color:#fff;
+}
+
+.btn:active{
+	background-color: #535370;
+	color:#fff;
+}
+
+.btn{
+	text-align: center;
+	padding-top: 0px;
+	background-color: #343A40;
+	border-radius: 3px;
+	border:1px solid #343A40;
+	color:#fff;
+}
+
+.btn-inverse{
+	background-color: #fff;
+	color:#343A40;
+	text-align: center;
+	width:20%;
+	height:4.3vh;
+}
+
+.btn-inverse:hover{
+	background-color: #fff;
+	color: #343A40;
+}
+
+.btn-inverse:active{
+	background-color: #fff;
+	color: #343A40;
+}
+
+
+.link{
+	color:#fff;
+}
+
+.link:hover{
+	color:#fff;
+}
+
+
+#btnAdd{
+	margin:1vh 0;
+}
+
+#btnRow{
+	padding-left:0.7vw;
+	padding-top: 1.9vh;
+}
+
+tr,td{
+	text-align: center;
+}
+
+#categoryFilter, #clientFilter{
+
+	width:30%;
+	height:4vh;
+}
+
+.table-dark{
+	background-color: #343A40;
+}
+
+
+/*    Transactions Page Styles           */
+
+.transactionForm{
+	width:80%;
+	padding: 10vh 1vh;
+	margin:0 auto;
+}
+
+#form-wrapper{
+	margin: 11vh auto;
+	width: 80%;
+	border:1px solid #343A40;
+	border-radius: 3px;
+	color:#fff;
+	background-color: #343A40;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 768px){
+
+	#logInDiv{
+		width:80vw;
+		margin:27vh auto;
+	}
+
+}

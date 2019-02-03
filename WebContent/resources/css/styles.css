@@ -1,0 +1,25 @@
+.productCard{
+	border: 2px solid #bdbdbd;
+	margin-left: 16vw;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+
+.col-12{
+	max-height: 60vh;
+	overflow-y: auto;
+}
+
+.productCard .col-2{
+	width: 80%;
+	margin: auto auto;
+}
+
+.productCard img{
+	opacity: 1;
+}
+
+.productCard a{
+	text-decoration: none;
+}

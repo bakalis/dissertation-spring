@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Product Retrieval
+	</title>
+	<div data-th-replace="template :: headers">
+	
+	</div>
+	
+</head>
+<body>
+	<div data-th-replace="template :: navbar">
+	
+	</div>
+
+
+	
+
+
+	<div class="container-fluid">
+		<div id="content-wrapper">
+			<h1 class="text-center" id="pageTitle">Product Retrieval</h1>
+			<div data-th-if="${error!=null}" data-th-text="${error}" class="alert alert-danger text-center">
+			</div>
+			<div id="form-wrapper"> 
+				<form class="transactionForm" method="POST">
+					  <div class="form-group row">
+					    <label for="productId" class="col-sm-2 col-form-label">Product Id:</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" name="productId" id="productId" placeholder="Insert Product Id here">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="productName" class="col-sm-2 col-form-label">Product Name:</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" name="productName" id="productName" placeholder="Insert Product Name here">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="categoryFilter" class="col-sm-2 col-form-label">Category:</label>
+						  <div class="col-lg-10">
+						    <select name="category" id="categoryFilter">
+								 <option data-th-each="category : ${categories}" data-th-value="${category.getId()}" data-th-text="${category.getCategoryName()}">Village</option> 
+							</select> 
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="clientFilter" class="col-sm-2 col-form-label">Client:</label>
+						  <div class="col-lg-10">
+						    <select name="client" id="clientFilter">
+								<option data-th-each="client : ${clients}" data-th-value="${client.getId()}" data-th-text="${client.getClientName()}">Village</option> 
+							</select> 
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+						  <div class="col-lg-10">
+						  		<input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity here">
+						  </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="code" class="col-sm-2 col-form-label">Storage Code</label>
+					    <div class="col-lg-10">
+					      <input type="text" class="form-control" name="code" id="code" placeholder="Enter Storage Code here">
+					    </div>
+					  </div>
+
+					  <div class="form-group row">
+					    <div class="col-lg-10" id="btnRow">
+					      <button type="submit" class="btn btn-inverse">Retrieve Products</button>
+					    </div>
+					  </div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>	
+
+	
+
+<div data-th-replace="template :: scripts">
+	
+</div>
+
+</body>
+</html>

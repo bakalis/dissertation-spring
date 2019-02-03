@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title data-th-if="${category==null}">
+		Category Creation
+	</title>
+	<title data-th-if="${category!=null}">
+		Category Editing
+	</title>
+	<div data-th-replace="template :: headers">
+	
+	</div>
+	
+</head>
+<body>
+	<div data-th-replace="template :: navbar">
+	
+	</div>
+
+
+	
+
+
+	<div class="container-fluid">
+		<div id="content-wrapper">
+			<h1 data-th-if="${category==null}" class="text-center" id="pageTitle">Category Creation</h1>
+			<h1 data-th-if="${category!=null}" class="text-center" id="pageTitle">Category Editing</h1>
+			<div data-th-if="${error!=null}" data-th-text="${error}" class="alert alert-danger text-center">
+			</div>
+			<div id="form-wrapper"> 
+				<form class="transactionForm" method="POST">
+					  <div class="form-group row">
+					    <label for="categoryId" class="col-sm-2 col-form-label">Category Id:</label>
+					    <div class="col-lg-10">
+					      <input data-th-if="${category!=null}" data-th-readonly="${category!=null}" type="text" data-th-value="${category.getId()}" class="form-control" name="categoryId" id="categoryId" placeholder="Insert Category Id here">
+					      <input data-th-if="${category==null}"  type="text"  class="form-control" name="categoryId" id="categoryId" placeholder="Insert Category Id here">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="category" class="col-sm-2 col-form-label">Category:</label>
+					    <div class="col-lg-10">
+					      <input data-th-if="${category!=null}"  type="text" data-th-value="${category.getCategoryName()}" class="form-control" name="categoryName" id="categoryName" placeholder="Insert Category Name here">
+					      <input data-th-if="${category==null}"  type="text"  class="form-control" name="categoryName" id="categoryName" placeholder="Insert Category Name here">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <div class="col-lg-10" id="btnRow">
+					      <button data-th-if="${category==null}" type="submit" class="btn btn-inverse">Create Category</button>
+					      <button data-th-if="${category!=null}" type="submit" class="btn btn-inverse">Edit Category</button>
+					    </div>
+					  </div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>	
+
+	
+<div data-th-replace="template :: scripts">
+	
+</div>
+
+</body>
+</html>

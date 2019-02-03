@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div data-th-fragment="headers" data-th-remove="tag">
+	<link rel="stylesheet" type="text/css" data-th-href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" data-th-href="@{/css/styles2.css}">
+	</div>
+		
+	<nav data-th-fragment="navbar" class="navbar navbar-expand-md navbar-dark bg-dark">
+		  <div class="container-fluid" id="navbarId">
+		    <a data-th-href="@{/index}" class="navbar-brand">Bakalis Apps</a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarResponsive">
+		      <ul class="navbar-nav ml-auto">
+		       <li class="nav-item dropdown">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Information
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" data-th-href="@{/index}">Warehouse Contents</a>
+			          <a class="dropdown-item" data-th-href="@{/transactions}">Transactions</a>
+			        </div>
+		      </li>
+		      <li class="nav-item dropdown">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Management
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" data-th-href="@{/entry}">Add Products</a>
+			          <a class="dropdown-item" data-th-href="@{/retrieval}">Retrieve Products</a>
+			          <a class="dropdown-item" data-th-href="@{/categories}">Manage Categories</a>
+			          <a class="dropdown-item" data-th-href="@{/clients}">Manage Clients</a>
+			        </div>
+		      </li>
+		      <li class="nav-item">
+		          <a href="file:///E:/Angular/spring/login.html" class="nav-link">Login</a>
+		      </li>
+		      </ul>
+		    </div>
+		  </div>
+	</nav>
+	
+	<div data-th-fragment="scripts" data-th-remove="tag">
+	<script type="text/javascript" data-th-src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript" data-th-src="@{/js/popper.min.js}"></script>
+	<script type="text/javascript" data-th-src="@{/js/bootstrap.min.js}"></script>
+	</div>
+</body>
+</html>

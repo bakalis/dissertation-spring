@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title data-th-if="${client==null}">
+		Client Creation
+	</title>
+	<title data-th-if="${client!=null}">
+		Client Editing
+	</title>
+	<div data-th-replace="template :: headers">
+	
+	</div>
+	
+</head>
+<body>
+	<div data-th-replace="template :: navbar">
+	
+	</div>
+
+
+	
+
+
+	<div class="container-fluid">
+		<div id="content-wrapper">
+			<h1 data-th-if="${client==null}" class="text-center" id="pageTitle">Client Creation</h1>
+			<h1 data-th-if="${client!=null}" class="text-center" id="pageTitle">Client Editing</h1>
+			<div data-th-if="${error!=null}" data-th-text="${error}" class="alert alert-danger text-center">
+			</div>
+			<div id="form-wrapper"> 
+				<form class="transactionForm" method="POST">
+					  <div class="form-group row">
+					    <label for="clientId" class="col-sm-2 col-form-label">Client Id:</label>
+					    <div class="col-lg-10">
+					      <input data-th-if="${client!=null}" data-th-readonly="${client!=null}" type="text" data-th-value="${client.getId()}" class="form-control" name="clientId" id="clientId" placeholder="Insert Client Id here">
+					      <input data-th-if="${client==null}"  type="text"  class="form-control" name="clientId" id="clientId" placeholder="Insert Client Id here">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="clientName" class="col-sm-2 col-form-label">Client Name:</label>
+					    <div class="col-lg-10">
+					      <input data-th-if="${client!=null}"  type="text" data-th-value="${client.getClientName()}" class="form-control" name="clientName" id="clientName" placeholder="Insert Client Name here">
+					      <input data-th-if="${client==null}"  type="text"  class="form-control" name="clientName" id="clientName" placeholder="Insert Client Name here">
+					  	</div>
+					  </div>
+					  <div class="form-group row">
+					    <div class="col-lg-10" id="btnRow">
+					      <button data-th-if="${client==null}" type="submit" class="btn btn-inverse">Create Client</button>
+					      <button data-th-if="${client!=null}" type="submit" class="btn btn-inverse">Edit Client</button>
+					    </div>
+					  </div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>	
+
+	
+<div data-th-replace="template :: scripts">
+	
+</div>
+
+</body>
+</html>
