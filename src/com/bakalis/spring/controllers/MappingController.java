@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bakalis.models.ContentsTuple;
+import com.bakalis.models.Product;
 import com.bakalis.spring.services.*;
 
 @Controller
@@ -38,7 +38,7 @@ public class MappingController {
 	// Get all the Contents of the Warehouse
 	@GetMapping("/index")
 	public String index(Model model){
-		ArrayList<ContentsTuple> contents = contentsService.getAllContents();
+		ArrayList<Product> contents = contentsService.getAllContents();
 		model.addAttribute("contents", contents);
 		errorService.passErrorMessageToModel(model);
 		contentsService.passAuthObjectToModel(model);
@@ -49,7 +49,7 @@ public class MappingController {
 	//Get the Filtered by the Search mechanic Contents of the Warehouse
 	@PostMapping("/index")
 	public String getSearchedContents(@RequestParam String searchBar, @RequestParam String searchFilter, Model model){
-		ArrayList<ContentsTuple> contents = contentsService.getSearchedContents(searchBar, searchFilter);
+		ArrayList<Product> contents = contentsService.getSearchedContents(searchBar, searchFilter);
 		model.addAttribute("contents", contents);
 		errorService.passErrorMessageToModel(model);
 		contentsService.passAuthObjectToModel(model);

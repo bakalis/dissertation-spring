@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bakalis.models.Category;
 import com.bakalis.models.Client;
-import com.bakalis.models.ContentsTuple;
 import com.bakalis.models.Product;
 import com.bakalis.models.SingleTransaction;
 import com.bakalis.spring.configuration.HibernateUtil;
@@ -32,61 +31,49 @@ public class ContentsService {
 	
 	//Get all the contents in the database
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public ArrayList<ContentsTuple> getAllContents(){
-		ArrayList<ContentsTuple> contents = new ArrayList<ContentsTuple>();
+	public ArrayList<Product> getAllContents(){		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		Criteria crit = session.createCriteria(Product.class);
 		ArrayList<Product> products = (ArrayList<Product>) crit.list();
-		for(Product product : products){
-			ContentsTuple tuple = new ContentsTuple();
-			tuple.setProduct(product);
-			tuple.setCategory(product.getCategory().getCategoryName());
-			contents.add(tuple);
-		}
 		session.close();
-		return contents;	
+		return products;	
 	}
 	
 	
 	//Get the contents for the table by the search form values
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public ArrayList<ContentsTuple> getSearchedContents(String query, String filter){
-		ArrayList<ContentsTuple> contents = new ArrayList<ContentsTuple>();
+	public ArrayList<Product> getSearchedContents(String query, String filter){
+		ArrayList<Product> products = null;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		switch(filter){
-		
 			case "id": //Select Option By Product Id
-				try{
+				if(validationService.isNumeric(query)){
 					Product product = session.get(Product.class, Integer.parseInt(query));
 					if(product!=null){
-						ContentsTuple tuple = new ContentsTuple();
-						tuple.setProduct(product);
-						tuple.setCategory(product.getCategory().getCategoryName());
-						contents.add(tuple);	
+						products = new ArrayList<Product>();
+						products.add(product);
+						session.close();
+						return products;
 					}
-				}catch(Exception ex){
-									
+				}else{
+					errorService.setError("Wrong Input");
 				}
 				break;
 			case "name": //Select Option By Product Name
 				Criteria crit = session.createCriteria(Product.class);
 				crit.add(Restrictions.like("productName", "%"+query+"%"));
-				ArrayList<Product> products = (ArrayList<Product>) crit.list();
+				products = (ArrayList<Product>) crit.list();
 				if(products!=null){
-					for(Product prod : products){
-						ContentsTuple tuple = new ContentsTuple();
-						tuple.setCategory(prod.getCategory().getCategoryName());
-						tuple.setProduct(prod);
-						contents.add(tuple);
-					}
-				}
+					session.close();
+					return products;				}
 				break;
 			case "category": //Select Option By Category
 				Criteria crit2 = session.createCriteria(Category.class);
 				crit2.add(Restrictions.like("categoryName", "%"+query+"%"));
 				ArrayList<Category> cats = (ArrayList<Category>) crit2.list();
+				products = new ArrayList<Product>();
 				if(cats!=null){
 					for(Category cat : cats){
 						crit = session.createCriteria(Product.class);
@@ -94,26 +81,21 @@ public class ContentsService {
 						ArrayList<Product> prods = (ArrayList<Product>) crit.list();
 						if(prods!=null){
 							for(Product prod : prods){
-								ContentsTuple tuple = new ContentsTuple();
-								tuple.setCategory(cat.getCategoryName());
-								tuple.setProduct(prod);
-								contents.add(tuple);
+								products.add(prod);
 							}
 						}
 					}
+					session.close();
+					return products;
 				}
 				break;
 			case "code": //Select Option By Storage Code
 				Criteria crit3 = session.createCriteria(Product.class);
 				crit3.add(Restrictions.eq("storageCode", query));
-				ArrayList<Product> products1 = (ArrayList<Product>) crit3.list();
-				if(products1!=null){
-					for(Product prod : products1){
-						ContentsTuple tuple = new ContentsTuple();
-						tuple.setCategory(prod.getCategory().getCategoryName());
-						tuple.setProduct(prod);
-						contents.add(tuple);
-					}
+				products = (ArrayList<Product>) crit3.list();
+				if(products!=null){
+					session.close();
+					return products;
 				}
 				break;
 			default:
@@ -121,9 +103,8 @@ public class ContentsService {
 				break;
 		}
 		
-		
 		session.close();
-		return contents;
+		return products;
 	}
 	
 	

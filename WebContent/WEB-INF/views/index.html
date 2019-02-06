@@ -57,11 +57,11 @@
   						</thead>
   						<tr data-th-each="content,index : ${contents}">
 						      <td data-th-text="${index.count}">1</td>
-						      <td data-th-text="${content.getProduct().getId()}">22006</td>
-						      <td data-th-text="${content.getProduct().getProductName()}">Korakovouni</td>
-						      <td data-th-text="${content.getCategory()}">Village</td>
-						      <td data-th-text="${content.getProduct().getQuantity()}">750</td>
-						      <td data-th-text="${content.getProduct().getStorageCode()}">Northern Kynouria</td>
+						      <td data-th-text="${content.getId()}">22006</td>
+						      <td data-th-text="${content.getProductName()}">Korakovouni</td>
+						      <td data-th-text="${content.getCategory().getCategoryName()}">Village</td>
+						      <td data-th-text="${content.getQuantity()}">750</td>
+						      <td data-th-text="${content.getStorageCode()}">Northern Kynouria</td>
 						</tr>
 					</table>
 				</div>	
