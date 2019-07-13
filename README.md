@@ -4,7 +4,7 @@ Built using Spring Web MVC, Hibernate, Thymeleaf. MySQL, Spring Security, Bootst
 
 Features: 
 
-Show Current Warehouse Contents \n
+Show Current Warehouse Contents \\
 Add or Retrieve Products
 Search Products by any spec
 Manage Clients Registered within the Application
